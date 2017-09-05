@@ -15,106 +15,74 @@ namespace RussianRoulette
 {
     public partial class RussianRoulette : Form
     {
+        Calculate myCalc =new Calculate();
         public RussianRoulette()
         {
             InitializeComponent();
             
+
         }
 
         private void btnSpin_Click(object sender, EventArgs e)
         {
-            Random random = new Random(DateTime.Now.Millisecond);
-            int ranNum;
-          
-            ranNum = random.Next(1, 7);
-            lblRandom.Text = ranNum.ToString();
+            
+            //runs spinner class.  
+            myCalc.spinner();
+
            
-            lblBulletsFired.Text = 0.ToString();
-            lblAway.Text = 0.ToString();
+            lblRandom.Text = myCalc.Rnd.ToString();
+            lblBulletsFired.Text = myCalc.BulletsFired.ToString();
+            lblAway.Text = myCalc.Away.ToString();
+
+            //Enables shoot and point away. Disables spin.
 
             btnShoot.Enabled = true;
-            btnPointAway.Enabled = true;
+            btnPointAway2.Enabled = true;
             btnSpin.Enabled = false;
             
         }
 
         private void btnShoot_Click(object sender, EventArgs e)
         {
-            bool kill = true;
-            calculate(kill);
-
-        }
-
-        private void btnPointAway_Click(object sender, EventArgs e)
-        {
             
-            bool kill = false;
-            calculate(kill);
+            myCalc.shoot();
+            calculate();
+            
+
         }
 
-        private void calculate(bool kill)
+        private void btnPointAway2_Click(object sender, EventArgs e)
         {
-            int ranNumber, bulletsFired, awayNumber, wins, losses, total;
-
-            wins = Convert.ToInt16(lblWins.Text);
-            losses = Convert.ToInt16(lblLosses.Text);
-            total = Convert.ToInt16(lblTotal.Text);
-            ranNumber = Convert.ToInt16(lblRandom.Text);
-            bulletsFired = Convert.ToInt16(lblBulletsFired.Text);
-            awayNumber = Convert.ToInt16(lblAway.Text);
-
-
-
-            bulletsFired++;
-
-             
-            if (bulletsFired == ranNumber || awayNumber == 2)
-            {
-                SoundPlayer audio = new SoundPlayer(global::RussianRoulette.Properties.Resources.Revolver);
-                audio.Play();
-                if (kill == true)
-            {
-                    
-                    MessageBox.Show("You are dead!");
-                    losses++;
-                }
-                else
-                {
-                    MessageBox.Show("You survived!");
-                    wins++;
-                }
-                total++;
-
-
-                btnShoot.Enabled = false;
-                btnPointAway.Enabled = false;
-                btnSpin.Enabled = true;
-
-
-            }
-            else
-            {
-                MessageBox.Show("Empty");
-            }
-            if (kill == false)
-            {
-                awayNumber++;
-            }
-
-            lblBulletsFired.Text = bulletsFired.ToString();
-            lblAway.Text = awayNumber.ToString();
-            if (awayNumber == 2)
-            {
-                btnPointAway.Enabled = false;
-            }
-            lblWins.Text = wins.ToString();
-            lblLosses.Text = losses.ToString();
-            lblTotal.Text = total.ToString();
+            myCalc.pointAway();
+            calculate();
         }
 
-        private void RussianRoulette_Load(object sender, EventArgs e)
+        public void calculate()
         {
+            //runs calculate method in class
+            myCalc.calculate();
 
+
+            //changes whether you can shoot, point away, or spin as necessary depending on variables in class
+            btnSpin.Enabled = myCalc.btnSpin;
+            btnShoot.Enabled = myCalc.btnShoot;
+            btnPointAway2.Enabled = myCalc.btnPointAway;
+
+
+            //shows the number of bullets you have fired and times you have pointed away
+            lblBulletsFired.Text = myCalc.BulletsFired.ToString();
+            lblAway.Text = myCalc.Away.ToString();
+
+            //displays winners, losers, and total on the form
+            lblWins.Text = myCalc.TotalWins.ToString();
+            lblLosses.Text = myCalc.TotalLosses.ToString();
+            lblTotal.Text = myCalc.Total.ToString();
         }
+
+        
+        
+
+
+
     }
 }
