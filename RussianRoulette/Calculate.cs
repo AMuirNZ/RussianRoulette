@@ -14,6 +14,8 @@ namespace RussianRoulette
 {
     public class Calculate
     {
+
+        //variables linked to the lables in the form
         public int BulletsFired { get; set; }
         public int Away { get; set; }
         public int Total { get; set; }
