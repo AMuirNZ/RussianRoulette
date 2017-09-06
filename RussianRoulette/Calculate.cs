@@ -77,11 +77,14 @@ namespace RussianRoulette
         }
          public void fires()
         {
+            //plays audio 
             SoundPlayer audio = new SoundPlayer(global::RussianRoulette.Properties.Resources.Revolver);
             audio.Play();
+
+            // 
             if (kill == true)
             {
-
+                
                 MessageBox.Show("You are dead!");
                 //losses++;
                 TotalLosses++;
@@ -94,6 +97,7 @@ namespace RussianRoulette
             }
             Total++;
 
+            //changes variables to reset game
             Away = 0;
             btnShoot = false;
             btnPointAway = false;
