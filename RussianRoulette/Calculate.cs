@@ -31,14 +31,18 @@ namespace RussianRoulette
        
         public void spinner()
         {
+            //randomly picks number
             Random random = new Random(DateTime.Now.Millisecond);
             Rnd = random.Next(1, 7);
+
+            //resets point away and bullets fired
             BulletsFired = 0;
             Away = 0;
         }
 
         public void shoot()
         {
+            
             kill = true;
             
         }
@@ -86,13 +90,15 @@ namespace RussianRoulette
             // 
             if (kill == true)
             {
-                
+
+                //Winning solution
                 MessageBox.Show("You are dead!");
                 //losses++;
                 TotalLosses++;
             }
             else
             {
+                //Losing solution
                 MessageBox.Show("You survived!");
                 //  wins++;
                 TotalWins++;
@@ -108,6 +114,8 @@ namespace RussianRoulette
 
        public void blank()
         {
+
+            //if bullet chamber is empty
             MessageBox.Show("Empty");
             btnShoot = true;
             btnSpin = false;
@@ -122,6 +130,8 @@ namespace RussianRoulette
         }
         public bool awayTrueOrFalse(int Away2)
         {
+            //If away is 2 disables PointAway button
+
             if (Away2 == 2)
             {
                 return false;
@@ -134,6 +144,7 @@ namespace RussianRoulette
 
         public int awayAdded(int Away2)
         {
+            //Adds an away if point away is fired
             int AwayPlusPlus = Away + 1;
             if (kill == false)
             {

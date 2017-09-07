@@ -68,5 +68,14 @@ namespace RussianRoulette.Properties {
                 return ResourceManager.GetStream("Revolver", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream wilhelm {
+            get {
+                return ResourceManager.GetStream("wilhelm", resourceCulture);
+            }
+        }
     }
 }
